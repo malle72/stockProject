@@ -10,6 +10,8 @@ from datetime import date
 # Above will likely require the index be set to the date to which the data is relevant
 # 
 df_stocks = pd.read_csv('stockProject/stock_prices.csv')
+df_stocks.set_index('date',drop=True,inplace=True)
+df_stocks.index = pd.to_datetime(df_stocks.index)
 """ print(df_stocks) """
 """ filler = []
 counter = 1
@@ -18,7 +20,7 @@ for item in df_stocks.columns:
     counter+=1
 
 df_stocks.loc[0]=filler """
-""" print(df_stocks)"""
+""" print(df_stocks) """
 current_price = []
 for tick in df_stocks.columns:
     current_price.append(yf.Ticker(tick).history(period='1d').Open.values[0])
